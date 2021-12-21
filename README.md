@@ -1,2 +1,2 @@
 # Study
-study for daily (coding test, DL, ML, stat, DA, etc. )
+study for daily (DL, ML, stat, DA, etc. )
