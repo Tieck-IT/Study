@@ -7,11 +7,13 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 
 - numpy
+    - eye : 항등행렬 I 생성
+        - onehoten_coded = category_index * np.eye(n)
     - random
         - randint(n,size) (a, b, size)
             - 0(a) ~ n(b)까지의 임의의 정수 size 개 반환
         - rand(n) (n, m)
-            - 0 ~ 1의 uniform array(n) , matrix(n,m) 반환
+            - 0 ~ 1의 균등 분포 uniform array(n) , matrix(n,m) 반환
         - randn(n, m)
             - 평균 0, 표준편차 1의 표준정규분포 난수 array(n) matrix(n,m) 반환
         - normal(mu, sigma**2, size)
@@ -21,15 +23,21 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
                 - split_index = int(len(X) * train_size)
                 - X_train, X_train = X[:split_index], X[split_index:]
                 - y_train, y_train = y[:split_index], y[split_index:]
-        - 축 k를 없애는 차원 축소 연산자
-            - sum(data, axis=k)
-            - max(data, axis=k)
-            - next(data, axis=k)
-            - etc ...
-            - axis = (a, b, ... ) / tuple로 다중 연산
-            ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/378da735-3465-4f25-95a6-8aa864622a2b/Untitled.png)
-        - 팁
-            - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
+    - argsort / argmax / argmin : arg가 붙으면 index를 반환
+    - vstack / hstack (vertical / horizontal) ([a,b,...])
+        - a라는 데이터에 행을 추가 / 삭제/ 삽입 하는 것은 비효율적
+        - (v/h)stack은 데이터가 추가(병합)된 것처럼 보여줌
+    - a.astype(np.int) : 타입 변경
+
+    - 축 k를 없애는 차원 축소 연산자
+        - sum(data, axis=k)
+        - max(data, axis=k)
+        - next(data, axis=k)
+        - etc ...
+        - axis = (a, b, ... ) / tuple 전달 가능
+
+    - 팁
+        - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
           
 
 
@@ -37,8 +45,7 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 
 
-# DeepLearning
-- linux 기본 명령어
+# linux 기본 명령어
     - ls (-option) (DIR): list 
         - a : 모든 파일 보기(숨긴파일 까지) (축약형 la)
         - l : 세로 리스트 형태로 보기 (축약형 ll)
@@ -47,7 +54,7 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
         - r : recursive (하위 항목까지 포함)
     - rm (제거 대상 DIR): remove
         - f : force (강제로, Y / N 질문 생략)
-        - r
+        - r : recursive
     - mv (대상 DIR) (이동 DIR): move
         - 파일 이동 기능
         - 이름 변경 기능
@@ -62,7 +69,6 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
     - tree :
         - 현재 디렉토리를 기준으로 디렉토리 구조를 tree로 보여줌
         -d : 디렉토리 구조만 보기
-        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8bb7bf52-2d80-4308-b288-420a4ece577c/Untitled.png)
         - tree > 파일명.txt : 출력 저장 (>기호는 대부분의 명령어에서 결과 저장 기능 수행)
     - zip / unzip (파일명):
         - 압축 / 압축 해제
@@ -76,13 +82,33 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
         - web에서 url을 다운
 
 
+# tf.teras
+    - 딥러닝 개발 스택 tensorflow / keras / PyTorch
+    
+    - Input layer -> hidden layer -> Output Layer
+        - compile -> fit -> evaluate, predict
 
-
-
-
-- tf.teras
-    - tensorflow / keras / PyTorch ?
-      
+    - compile
+        - loss : 손실함수 설정
+            - 분류
+                - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
+                - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
+                - 출력층 Dense( n, activation func = "softmax")
+                - metrics = ["accuracy"]
+                - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
+            - 이진 분류 (binary)                
+                - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
+                - 출력층 Dense(1, activation = "sigmoid")
+                - loss = "binary_crossentropy"
+                - metrics = ["acc", "AUC", Precision(), Recall()]
+            - 회귀
+                - 출력층 Dense(1)
+                - metrics = ["mse"]
+                    - mse
+                    - mae
+                    - mape : p 백분율(percentage)
+        - optimizer
+            - "optimizer 계보" 검색
     - dnn
         - Dense Layer의 단점
             - Input shape = 1차원
@@ -97,6 +123,8 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
         - 표준 ONNX 포맷
             - TensorRT에서 읽을 수 있음
 
+# coding test
+    - boj
  
 
  # git
