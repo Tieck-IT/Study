@@ -4,6 +4,12 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 # Data Handling
 - pandas
+    - 원핫인코딩
+        -pd.get_dummies()
+            - columns : 대상 열 or df
+            - drop_first = True : n-1개의 열 생성(정보손실 x, 차원축소 o)
+            - dummy_na = True : 결측값을 인코딩에 포함
+
 
 
 - numpy
@@ -18,9 +24,12 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
             - sigma * np.random.randn(...) + mu와 동일
         - shuffle(data)
             - data의 순서를 섞는다. (반환 X)
-                - split_index = int(len(X) * train_size)
-                - X_train, X_train = X[:split_index], X[split_index:]
-                - y_train, y_train = y[:split_index], y[split_index:]
+            ~~~
+                np.shuffle(x)
+                split_index = int(len(X) * train_size)
+                X_train, X_train = X[:split_index], X[split_index:]
+                y_train, y_train = y[:split_index], y[split_index:]
+            ~~~
     - argsort / argmax / argmin : arg가 붙으면 index를 반환
     - vstack / hstack (vertical / horizontal) ([a,b,...])
         - a라는 데이터에 행을 추가 / 삭제/ 삽입 하는 것은 비효율적
@@ -35,15 +44,15 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
         - axis = (a, b, ... ) / tuple 전달 가능
 
     - eye : 항등행렬 I 생성
-        - onehoten_coded
-            - category_index * np.eye(n)
-            - np.eye(n) [category_index]
+        - onehot encoding
+            `category_index * np.eye(n)`
+            ` np.eye(n) [category_index]`
 
 
     - 팁
         - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
         - onehot encoding : np.eye
-            - recovering to categorical : np,argmax
+            - recovering to categorical : np.argmax
           
 
 
@@ -53,8 +62,8 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 # linux 기본 명령어
     - ls (-option) (DIR): list 
-        - a : 모든 파일 보기(숨긴파일 까지) (축약형 la)
-        - l : 세로 리스트 형태로 보기 (축약형 ll)
+        - a : all, 모든 파일 보기(숨긴파일 까지) (축약형 la)
+        - l : long, 세로로 길게 형태로 보기 (축약형 ll)
         - ls -al 형태가 많이 사용됨 
     - cp (-option) (복사 대상 DIR) (복사 후 DIR): copy
         - r : recursive (하위 항목까지 포함)
@@ -90,45 +99,71 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 # tf.teras
 - 딥러닝 개발 스택 tensorflow / keras / PyTorch
-    ![Untitled](https://user-images.githubusercontent.com/90205987/147028688-0f9bfb09-0311-4738-a471-4ada2a733707.png)
-    - trend : tensorflow -> keras -> PyTorch
-    - Input layer -> hidden layer -> Output Layer
-        - compile -> fit -> evaluate, predict
+![Untitled](https://user-images.githubusercontent.com/90205987/147028688-0f9bfb09-0311-4738-a471-4ada2a733707.png)
+- trend : tensorflow -> keras -> PyTorch
 
-    - compile
-        - loss : 손실함수 설정
-            - 분류
-                - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
-                - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
-                - 출력층 Dense( n, activation func = "softmax")
-                - metrics = ["accuracy"]
-                - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
-            - 이진 분류 (binary)                
-                - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
-                - 출력층 Dense(1, activation = "sigmoid")
-                - loss = "binary_crossentropy"
-                - metrics = ["acc", "AUC", Precision(), Recall()]
-            - 회귀
-                - 출력층 Dense(1)
-                - metrics = ["mse"]
-                    - mse
-                    - mae
-                    - mape : p 백분율(percentage)
-        - optimizer
-            - "optimizer 계보" 검색
-    - dnn
-        - Dense Layer의 단점
-            - Input shape = 1차원
-                - 이미지, 영상 데이터 = 4차원 (색 채널 3차원 + 데이터 갯수 1차원)
-                - 3차원 이상인 데이터는 Flatten()으로 1차원으로 변환하는 과정에서, 데이터 손실 발생
-    - cnn
-        - functional
-        - convolution (합성곱 연산)
-    - 저장 포맷
-        - .h5 : 하둡에서 사용되는 대용량 포멧 in tersorflow
-        - .h5 없으면 tensorflow 포맷
-        - 표준 ONNX 포맷
-            - TensorRT에서 읽을 수 있음
+- Input layer -> hidden layer -> Output Layer
+    - compile -> fit -> evaluate, predict
+
+- compile
+    - loss : 손실함수 설정
+        - 분류
+            - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
+            - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
+            - 출력층 Dense( n, activation func = "softmax")
+            - metrics = ["accuracy"]
+            - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
+        - 이진 분류 (binary)                
+            - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
+            - 출력층 Dense(1, activation = "sigmoid")
+            - loss = "binary_crossentropy"
+            - metrics = ["acc", "AUC", Precision(), Recall()]
+        - 회귀
+            - 출력층 Dense(1)
+            - metrics = ["mse"]
+                - mse
+                - mae
+                - mape : p 백분율(percentage)
+    - optimizer
+        - "optimizer 계보" 검색
+- 학습
+    - 데이터 총 개수  = batch_size * steps epochs  * step_size_per_epoch
+    - test data는 최소 500개 이상 되어야 제대로 학습됨
+- 전처리
+    - logscale 후에 정규화, 표준화
+    - input은 숫자 형태 (numpy로 넣기)
+        1. df.to_numpy() (type : np.ndarray)
+        2. df.astype(float) (type : df)
+    - activation func을 relu 했을 대 loss가 전부 nan
+        - tanh를 쓰니 정상작동
+            - target이 너무 커서 그렇다.
+            - log 스케일링 한 값의 평균이 5.305 , 6.249
+    
+    ```    Epoch 8/50
+    44/44 [==============================] - 0s 3ms/step - loss: 2715612872704.0000 - mae: 888272.1250 - val_loss: 5482972971008.0000 - val_mae: 1303719.8750
+    ```
+
+- 성능평가
+    - plt.scatter(y_test,y_pred)
+        - y = x꼴이면 예측을 잘하는 것
+    - loss
+    - metrics
+    
+- dnn
+    - Dense Layer의 단점
+        - Input shape = 1차원
+            - 이미지, 영상 데이터 = 4차원 (색 채널 3차원 + 데이터 갯수 1차원)
+            - 3차원 이상인 데이터는 Flatten()으로 1차원으로 변환하는 과정에서, 데이터 손실 발생
+- cnn
+    - functional
+    - convolution (합성곱 연산)
+- 저장 포맷
+    - .h5 : 하둡에서 사용되는 대용량 포멧 in tersorflow
+    - .h5 없으면 tensorflow 포맷
+    - 표준 ONNX 포맷
+        - TensorRT에서 읽을 수 있음
+    
+
 
 # coding test
     - boj
