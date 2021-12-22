@@ -89,8 +89,9 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 
 # tf.teras
-    - 딥러닝 개발 스택 tensorflow / keras / PyTorch
-    
+- 딥러닝 개발 스택 tensorflow / keras / PyTorch
+    ![Untitled](https://user-images.githubusercontent.com/90205987/147028688-0f9bfb09-0311-4738-a471-4ada2a733707.png)
+    - trend : tensorflow -> keras -> PyTorch
     - Input layer -> hidden layer -> Output Layer
         - compile -> fit -> evaluate, predict
 
