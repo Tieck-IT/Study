@@ -7,8 +7,6 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 
 
 - numpy
-    - eye : 항등행렬 I 생성
-        - onehoten_coded = category_index * np.eye(n)
     - random
         - randint(n,size) (a, b, size)
             - 0(a) ~ n(b)까지의 임의의 정수 size 개 반환
@@ -36,8 +34,16 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
         - etc ...
         - axis = (a, b, ... ) / tuple 전달 가능
 
+    - eye : 항등행렬 I 생성
+        - onehoten_coded
+            - category_index * np.eye(n)
+            - np.eye(n) [category_index]
+
+
     - 팁
         - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
+        - onehot encoding : np.eye
+            - recovering to categorical : np,argmax
           
 
 
