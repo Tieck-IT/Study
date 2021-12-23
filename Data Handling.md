@@ -6,8 +6,6 @@
             - drop_first = True : n-1개의 열 생성(정보손실 x, 차원축소 o)
             - dummy_na = True : 결측값을 인코딩에 포함
 
-
-
 - ## numpy
     - random
         - randint(n,size) (a, b, size)
@@ -52,10 +50,6 @@
         - onehot encoding : np.eye
             - recovering to categorical : np.argmax
           
-
-
-
-
 
 
 # linux 기본 명령어

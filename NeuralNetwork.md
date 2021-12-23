@@ -9,38 +9,38 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
 ![Untitled](https://user-images.githubusercontent.com/90205987/147028688-0f9bfb09-0311-4738-a471-4ada2a733707.png)
 - trend : tensorflow -> keras -> PyTorch
 
+
+## Layer 구조와 진행 순서
 - Input layer -> hidden layer -> Output Layer
     - compile -> fit -> evaluate, predict
+  
+## compile
+  - loss : 손실함수 설정
+      - **분류**
+          - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
+          - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
+          - 출력층 Dense( n, activation func = "softmax")
+          - metrics = ["accuracy"]
+          - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
+      - **이진 분류** (binary)                
+          - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
+          - 출력층 Dense(1, activation = "sigmoid")
+          - loss = "binary_crossentropy"
+          - metrics = ["acc", "AUC", Precision(), Recall()]
+      - **회귀**
+          - 출력층 Dense(1)
+          - metrics = ["mse"]
+              - mse
+              - mae
+              - mape : p 백분율(percentage)
+  - optimizer
+      ![optimizers](https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png)
+  
 
-
-
-
-
-- ## compile
-    - loss : 손실함수 설정
-        - **분류**
-            - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
-            - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
-            - 출력층 Dense( n, activation func = "softmax")
-            - metrics = ["accuracy"]
-            - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
-        - **이진 분류** (binary)                
-            - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
-            - 출력층 Dense(1, activation = "sigmoid")
-            - loss = "binary_crossentropy"
-            - metrics = ["acc", "AUC", Precision(), Recall()]
-        - **회귀**
-            - 출력층 Dense(1)
-            - metrics = ["mse"]
-                - mse
-                - mae
-                - mape : p 백분율(percentage)
-    - optimizer
-        - "optimizer 계보" 검색
 - ## 학습
-    - 데이터 총 개수  = batch_size * steps epochs  * step_size_per_epoch
+    - 데이터 총 개수  = batch_size * steps  epochs  * step_size_per_epoch
     - test data는 최소 500개 이상 되어야 제대로 학습됨
-
+    - Bacth size는 2의 n제곱으로 하는 것이 좋다. (메모리 단위와 동일하게)
 
     ### 배치 정규화 _Bacth Normalization_
       - weight의 값이 평균 0 , 분산 1인 상태로 분포
@@ -101,11 +101,20 @@ study for daily (coding test, linux, DL, ML, stat, DA, etc. )
       - padding으로 가장자리에 0을 추가하여 사이즈 유지 가능
     - Filter (Layer) -> Kernel (Channel)
       - 1개의 필터는 여러장의 Kernel로 구성되어 있다.
-## Pooling 
-  - Conv 적용된 Feature map의 일정 영역 별로 하나의 값을 추출하여(Max or Average 등) Feature map의 사이즈를 줄임
-  - stride : 한 걸음의 크기, 건너뛰는 픽셀의 수
-  - padding : 가장자리에 0인 데이터를 추가하여 Feature map의 size를 조절하는 방법
+    - padding : 가장자리에 0인 데이터를 추가하여 Feature map의 size를 조절하는 방법
+      - Feature map 축소에 저항, 원하는 형태의 사이즈로 조절할 때 사용
 
+
+## Pooling -> Stride
+  - Conv 적용된 Feature map의 일정 영역 별로 하나의 값을 추출하여(Max or Average 등) Feature map의 사이즈를 줄임
+  - Max pooling : Sharp한 feature(Edge 등) 값을 추출
+  - Average pooling : Smooth한 feature 값을 추출
+  - 일반적으로 Sharp한 Feature가 Classification에 유리하여 Max pooling이 많이 사용됨
+  - 특정 위치의 feature값이 손실 되는 이슈 등으로 최근 CNN에서는 많이 사용되진 않음.
+
+### 단점 보완
+  - 최근 CNN에서는 Pooling 대신 Stride를 이용
+    - stride : 한 걸음의 크기, 건너뛰는 픽셀의 수
 
 
 ## 저장 포맷
