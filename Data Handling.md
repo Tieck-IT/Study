@@ -1,10 +1,10 @@
-# Data Handling
+# DataHandling
 - ## pandas
     - 원핫인코딩
         -pd.get_dummies()
             - columns : 대상 열 or df
             - drop_first = True : n-1개의 열 생성(정보손실 x, 차원축소 o)
-            - dummy_na = True : 결측값을 인코딩에 포함
+            - - dummy_na = True : 결측값을 인코딩에 포함
 
 - ## numpy
     - random
@@ -38,12 +38,14 @@
         - axis = (a, b, ... ) / tuple 전달 가능
 
     - eye : 항등행렬 I 생성
-        - onehot encoding
-          - 
-            `category_index * np.eye(n)`
+    - onehot encoding
+        
+        `category_index * np.eye(n)`
 
-            `np.eye(n) [category_index]`
+        `np.eye(n) [category_index]`
 
+        - decoding
+           `np.argmax(ohe_matrix)`
 
     - 팁
         - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
