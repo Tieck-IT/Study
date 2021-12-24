@@ -2,7 +2,27 @@
 table of study notes
 
 
-## Data Handling.md
+## Tree
+     C:.
+    └─Study
+      │  Data Handling.md
+      │  MachineLearning.md
+      │  NeuralNetwork.md
+      │  README.md
+      │  [templete]pretrained_classification.ipynb
+      │
+      └─tf_keras
+              dnn_practice.ipynb
+              kears_pratice.ipynb
+              movie_prediction_dnn.ipynb
+
+
+
+
+
+
+
+# Data Handling.md
   - data handling
     - pandas
     - numpy
@@ -32,33 +52,33 @@ table of study notes
 
 
 
-## NeuralNetwork.md
-  - tensorflow.keras
-    - Layer 구조 & 진행 순서
-    - Compile
-      - loss 
-        - feature dataset
-          - Classification
-            - binary
-            - multi-label / muliti - class
-          - Regression
-        - image dataset
-          - Classification
-            - multi-class
-      - optimizer
-    - fit (train)
-      - Bacth Normalization
-    - preprocessing
-    - predict
-    - model evaluation
-    - Tips
-      - Bacth Normalization
-      - functional API with tf.keras
-  
-  - DNN
-  - CNN
-    - Convolution
-    - Pooling / Stride / Padding
+# NeuralNetwork.md
+    - tensorflow.keras
+      - Layer 구조 & 진행 순서
+      - Compile
+        - loss 
+          - feature dataset
+            - Classification
+              - binary
+              - multi-label / muliti - class
+            - Regression
+          - image dataset
+            - Classification
+              - multi-class
+        - optimizer
+      - fit (train)
+        - Bacth Normalization
+      - preprocessing
+      - predict
+      - model evaluation
+      - Tips
+        - Bacth Normalization
+        - functional API with tf.keras
+    
+    - DNN
+    - CNN
+      - Convolution
+      - Pooling / Stride / Padding
   
 
-## MachineLearning.md
+# MachineLearning.md
