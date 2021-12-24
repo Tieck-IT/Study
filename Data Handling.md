@@ -1,11 +1,18 @@
 # DataHandling
 - ## pandas
     - 원핫인코딩
-        -pd.get_dummies()
+        - pd.get_dummies()
             - columns : 대상 열 or df
             - drop_first = True : n-1개의 열 생성(정보손실 x, 차원축소 o)
-            - - dummy_na = True : 결측값을 인코딩에 포함
+        - dummy_na = True : 결측값을 인코딩에 포함
 
+    - 전처리 과정에서 test dataset은 **절대로** 수정하면 안된다.
+    - test dataset에 할 수 있는 유일한 경우는 train 형태와 동일하게 맞추기 위한, train과 동일한 전처리 할 때 뿐이다.
+      - reason 1. test dataset은 실제 데이터라고 가정했기 때문
+        - 존재하지 않는 미래의 데이터(test dataset)을 어떤 방식으로든 접근 할 수 없다.
+      - reason 2. train dataset의 데이터 분포 = 실제 데이터 분포
+        - 함께 스케일링 하면 test dataset이 mean, std에 반영되어 데이터 오염.(data leasky)
+    - Scaling (normalization / stdandization / log / minmax)
 - ## numpy
     - random
         - randint(n,size) (a, b, size)
@@ -26,7 +33,8 @@
             ~~~
     - argsort / argmax / argmin : arg가 붙으면 index를 반환
     - vstack / hstack (vertical / horizontal) ([a,b,...])
-        - a라는 데이터에 행을 추가 / 삭제/ 삽입 하는 것은 비효율적
+        - 데이터에 직접 행을 추가 / 삭제/ 삽입 하는 것은 비효율적
+          - numpy는 내부적으로 새로 생성되기 때문
         - (v/h)stack은 데이터가 추가(병합)된 것처럼 보여줌
     - a.astype(np.int) : 타입 변경
 
@@ -111,3 +119,4 @@
         - .git이 존재하는 하위 dir에 .git을 생성하면 꼬인다.
         - .git은 유일하다. (하위 dir까지 포함)
         - tree (> 파일명.txt)로 dir 구조를 저장, 확인 할 수 있다.
+

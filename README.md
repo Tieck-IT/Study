@@ -1,5 +1,8 @@
 # Table of Contents
-  ## Data Handling.md
+table of study notes
+
+
+## Data Handling.md
   - data handling
     - pandas
     - numpy
@@ -25,20 +28,23 @@
     - config
     - Tips
 
-  ## MachineLearning.md
 
 
 
 
-  ## NeuralNetwork.md
+## NeuralNetwork.md
   - tensorflow.keras
     - Layer 구조 & 진행 순서
     - Compile
       - loss 
-        - Clissification
-          - binary
-          - multi-label / muliti - class
-        - Regression
+        - feature dataset
+          - Classification
+            - binary
+            - multi-label / muliti - class
+          - Regression
+        - image dataset
+          - Classification
+            - multi-class
       - optimizer
     - fit (train)
       - Bacth Normalization
@@ -54,3 +60,5 @@
     - Convolution
     - Pooling / Stride / Padding
   
+
+## MachineLearning.md
