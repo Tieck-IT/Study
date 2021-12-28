@@ -3,7 +3,6 @@ table of study notes
 
 
 ## Tree
-    C:.
     │  Data Handling.md
     │  MachineLearning.md
     │  NeuralNetwork.md
@@ -59,20 +58,27 @@ table of study notes
       - Layer 구조 & 진행 순서
       - Compile
         - loss 
-          - feature dataset
-            - Classification
-              - binary
-              - multi-label / muliti - class
-            - Regression
-          - image dataset
-            - Classification
-              - multi-class
-        - optimizer
+          - Classification
+            - binary
+            - multi-label / muliti - class
+          - Regression
+        - image dataset
+          - Classification
+            - multi-class
+      - optimizer
+      - Callbacks
+      - ImageGenerator의
       - fit (train)
-        - Bacth Normalization
+        - Transfer learning
       - preprocessing
-      - predict
+        - Scaling / Normalization
+        - Bacth Normalization
+        - Regularization
+        - Overfitting
+        - Cross Validation
       - model evaluation
+        - Classification metrics from _ML_
+        - loss
       - Tips
         - Bacth Normalization
         - functional API with tf.keras

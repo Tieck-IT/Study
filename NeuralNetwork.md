@@ -32,50 +32,69 @@ Start here to Fine Performance (**excute time**, **val_loss**)
   - predict 때는 적용되지 않음
 - Dense Layer : 1차원을 입력으로 받는, 퍼셉트론 구조
 - Conv2D Layer : Conv 연산을 진행
-- (Max/average)Pooling2D Layer :
+- (Max/average)Pooling2D Layer
 # compile
-  - loss : 손실함수 설정
-    - **feature dataset**
-      - 분류
-          - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
-          - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
-          - 출력층 Dense( n, activation func = "softmax")
-          - metrics = ["accuracy"]
-          - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
-      - 이진 분류 (binary)                
-          - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
-          - 출력층 Dense(1, activation = "sigmoid")
-          - loss = "binary_crossentropy"
-          - metrics = ["acc", "AUC", Precision(), Recall()]
-      - 회귀
-          - 출력층 Dense(1)
-          - metrics = ["mse"]
-              - mse : [(예측값 - 실제값)^2의 합]의 평균
-              - mae : [|예측값 - 실제값|의 합]의 평균
-              - mape : mae의 p 백분율(percentage)
-        - loss is nan?
-          - 스케일이 너무 큰 경우
-            - sol 1. 데이터, layer 구조 확인, 재설정
-            - sol 2.  kernel_initializer 사용하기 : he_normal( fit for Relu ) / lecun_normal / Xavier Glort(동적 sd 조절)
-              - shift parametor를 이용한 느슨한 정규화
-              - 좋은 가중치 초기화의 조건
-              1. 값이 동일하지 않음
-              2. 충분히 작아야 한다.
-              3. 적당한 sd를 가져야 한다.
-                  - (표준)정규 분포
-      - **image dataset**
-        분류
-          - sparse_categorical_crossentropy (Input label : one hot encoding X)
-          - categorical_crossentropy (Input label: one hot encoding O)
+## loss : 손실함수 설정
+- 분류
+    - categorical_crossentropy : y의 값이 onehot encoding 인 경우 (y is one-hot-encoded)
+    - sparse_categorical_crossentropy : onehot encoding을 keras에서 대신 해줌 (y is categorical classes)
+    - 출력층 Dense( n, activation func = "softmax")
+    - metrics = ["accuracy"]
+    - 정말 성능을 높이려면 label 1개를 인식하는 n개의 모델 만들기
+- 이진 분류 (binary)                
+    - 1개가 결정되면 다른 라벨의 확률 결정 1 = p + (1 - p)
+    - 출력층 Dense(1, activation = "sigmoid")
+    - loss = "binary_crossentropy"
+    - metrics = ["acc", "AUC", Precision(), Recall()]
+- 회귀
+    - 출력층 Dense(1)
+    - metrics = ["mse"]
+        - mse : [(예측값 - 실제값)^2의 합]의 평균
+        - mae : [|예측값 - 실제값|의 합]의 평균
+        - mape : mae의 p 백분율(percentage)
+  - loss is nan?
+    - 스케일이 너무 큰 경우
+      - sol 1. 데이터, layer 구조 확인, 재설정
+      - sol 2.  kernel_initializer 사용하기 : he_normal( fit for Relu ) / lecun_normal / Xavier Glort(동적 sd 조절)
+        - shift parametor를 이용한 느슨한 정규화
+        - 좋은 가중치 초기화의 조건
+        1. 값이 동일하지 않음
+        2. 충분히 작아야 한다.
+        3. 적당한 sd를 가져야 한다.
+            - (표준)정규 분포
+- **image dataset**
+  분류
+    - sparse_categorical_crossentropy (Input label : one hot encoding X)
+    - categorical_crossentropy (Input label: one hot encoding O)
 
-          - multi-class (1개의 객체만 존재 + 여러개의 class에 속함)
-          - multi-label (1개의 라벨에 속한 여러 객체 존재)
-  - [optimizer](https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png)
+    - multi-class (1개의 객체만 존재 + 여러개의 class에 속함)
+    - multi-label (1개의 라벨에 속한 여러 객체 존재)
+
+## [optimizer](https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png)
    
         model.compile(optimizer="RMSprop", ...)
         model.compile(optimizer=RMSprop(learning_rate=0.001), ...)
       
   
+## Callbacks
+- Model checkpoint : best_weight 일 때 저장
+- Early Stooping : patience 번의 epoch 동안 성능 개선이 없으면 중지
+- ReduceLROnPlateau : 성능지표(loss)가 옆으로 횡보하는 고원이 patience 번의 epoch 동안 반복되면 중지
+- Custom Callbacks
+  - Realtime loss callback fun
+  - learning rate scheduler : 일정 기준(epoch 등)로 learning rate 변경
+
+
+## ImageGenerator
+ImageGenerator의 2가지 역할
+1. Data Augmentation
+2. Bring Data per Batch
+- 데이터를 가져와서 전처리하는 일종의 파이프라인
+- RAM SIZE <<< DATA SIZE 이기 때문에 전체 데이터 셋을 메모리에 한번에 올리고 처리할 수 없다. 그래서 Batch 단위로 가져와서 처리한다.
+  - ImageGenerator 
+    - _tf.keras.preprocessing.image.ImageDataGenerator_
+
+
 
 # 학습
 - 데이터 총 개수  = batch_size * steps  epochs  * step_size_per_epoch
@@ -99,6 +118,9 @@ Start here to Fine Performance (**excute time**, **val_loss**)
   - [Tensorflow.keras pretrained model](https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet)
   - EfficientNetB3도 좋음.
 
+
+
+
 # 전처리
 - 정규화, 표준화
 - input은 숫자 형태 (numpy로 넣기)
@@ -109,8 +131,11 @@ Start here to Fine Performance (**excute time**, **val_loss**)
         - target이 너무 커서 그렇다.
         - log 스케일링 한 값의 평균이 5.305 , 6.249
 
+
+
+
 ## 정규화
-- 함수를 사용하거나 이미지의 경우 /255.0 으로 가능
+- 함수를 사용하거나 이미지의 경우 /255.0 으로 가능 (at RGB format)
 - 하지 않으면 학습이 더디게 진행되므로 반드시 전처리 과정에 포함
 
 ## 배치 정규화 _Bacth Normalization_
@@ -123,7 +148,6 @@ Start here to Fine Performance (**excute time**, **val_loss**)
 - relu가 먼저 적용되면 음수인 부분이 0이 되어버리므로 BN 적용 전 weight<0인 부분을 잃는다.
   - train set과 test set의 분포가 다르면 Feature 분포가 다르고 Hidden Layer가 깊을 수록 변화가 누적되어 학습이 어려움.
   - 즉, Layer가 깊을 수록 BN의 적용 여부에 따른 차이가 증가해서 기존에 학습했던 분포와 전혀 다른 분포를 갖게 된다.
-
   - Dropout 되기 전에 써야함
 ## 규제 _Regularization_
 - Layer의 weight 값이 1보다 작은 상태를 유지
@@ -144,36 +168,53 @@ Start here to Fine Performance (**excute time**, **val_loss**)
   - sol 3. 데이터 전처리 (정규화 등)
   - sol 4. 성능(val_loss)이 개선될 때마다 모델을 저장 (model checkpoint)
   - sol 5. 특정 횟수(patience) 동안 성능이 개선되지 않으면 중지 (early stopping)
-    
+
+
+
+## 교차 검증 _Cross Validation_
+      train data set의 크기가 부족할 때 사용
+  - 일반적으로 OutOfFold 방식이 사용됨
+    - K-fold Cross Validation 등
+    - **20%** 의 validation set * **5** = **100%**
+      - 서로 다른 5개의 모델로 훈련했기 때문에 앙상블 모델로 여길 수도 있음
+  - train dataset의 절대량에 따라 **validation split**의 비율 결정
+  - k-fold's split
+  - batch_size 는 gpu의 성능에 따라 결정
+  
+
+      train set의 데이터 크기에 따라 fold 개수 K를 결정
+
+
+
+  일반적으로 test(validation) set의 비율을 20%로 설정하지만 train set이 진짜 작으면 test set을 0.01, 0.05를 쓴다.
+
+  - 오버 샘플링도 데이터 절대량 부족의 한계 극복하기 어려움
+    - DL, GAN 역시 데이터 수 적은 한계를 완전히 극복하기 어려움
+    - 오버샘플링으로 새로운 데이터를 생성해도 원본과 유사한 데이터가 쌓이는 것이기 때문에 Epoch를 반복하는 효과 
+  - 사용시 주의할 점
+      - 반복으로 oversampling과 유사한 효과 낼 수 있음
+      - Epoch 너무 늘어나면 과적합 우려
+
+  GAN을 이용한 oversampling 아이디어는 많지만 성능이 좋은 알고리즘이 아직 없음
+
 
 ## 성능평가
+- [분류 모델 평가 지표](https://github.com/Tieck-IT/proeject/blob/master/README.md)
 - plt.scatter(y_test,y_pred)
     - y = x 꼴이면 예측을 잘하는 것
 - loss
-- metrics
-
-## Callbacks
-- Model checkpoint : best_weight 일 때 저장
-- Early Stooping : patience 번의 epoch 동안 성능 개선이 없으면 중지
-- ReduceLROnPlateau : 성능지표(loss)가 옆으로 횡보하는 고원이 patience 번의 epoch 동안 반복되면 중지
-- Custom Callbacks
-  - Realtime loss callback fun
-  - learning rate scheduler : 일정 기준(epoch 등)로 learning rate 변경
-
-
-## ImageGenerator
-ImageGenerator의 2가지 역할
-1. Data Augmentation
-2. Bring Data per Batch
-- 데이터를 가져와서 전처리하는 일종의 파이프라인
-- RAM SIZE <<< DATA SIZE 이기 때문에 전체 데이터 셋을 메모리에 한번에 올리고 처리할 수 없다. 그래서 Batch 단위로 가져와서 처리한다.
-  - ImageGenerator 
-    - _tf.keras.preprocessing.image.ImageDataGenerator_
-    - 
-  
 
 
 
+# functional API 
+[이전 층의 출력 = 다음 층의 출력]을 명시하는 표기법
+
+      
+  ` input_tensor= Input(inputs = Input(shape=(X_train.shape[1],)))  `
+
+  ` X = Dense(10)(input_tensor)(x) `
+
+  ` X = Dense(10)(x)`
 
 
     
@@ -183,14 +224,6 @@ ImageGenerator의 2가지 역할
             - 이미지, 영상 데이터 = 4차원 (색 채널 3차원 + 데이터 갯수 1차원)
             - 3차원 이상인 데이터는 Flatten()으로 1차원으로 변환하는 과정에서, 데이터 손실 발생
 
-  - functional API : 이전 층의 출력 = 다음 층의 출력의 흐름을 명시하는 표기법
-
-        
-    ` input_tensor= Input(inputs = Input(shape=(X_train.shape[1],)))  `
-
-    ` X = Dense(10)(input_tensor)(x) `
-
-    ` X = Dense(10)(x)`
 
 
 
