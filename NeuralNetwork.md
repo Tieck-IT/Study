@@ -24,7 +24,6 @@ Start here to Fine Performance (**excute time**, **val_loss**)
         [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/template/%5Btemplate%5DROCAUC_and_confusionMatrix.ipynb)
 
 
-
 # Layer 구조와 진행 순서
 - Input layer -> hidden layer -> Output Layer
     - compile -> fit -> evaluate, predict
