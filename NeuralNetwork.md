@@ -17,8 +17,13 @@ Start here to Fine Performance (**excute time**, **val_loss**)
     - early stopping, ReduceLROnPlatue, RealTimeLossCallback(custom), ModelCheckPoint
   - ImageGenerator
   - Models (Custom / Pretrained)
-    - [[templete]pretrained_classification.ipynb](https://github.com/Tieck-IT/Study/blob/main/%5Btemplete%5Dpretrained_classification.ipynb)
+    - [[template]pretrained_classification.ipynb](https://github.com/Tieck-IT/Study/blob/main/%5Btemplete%5Dpretrained_classification.ipynb)
         [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/%5Btemplete%5Dpretrained_classification.ipynb)
+
+    - [[template]ROCAUC_and_confusionMatrix.ipynb](https://github.com/Tieck-IT/Study/blob/main/%5Btemplate%5Dauc_and_confusiomMatrix.ipynb)
+        [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/%5Btemplate%5Dauc_and_confusiomMatrix.ipynb)
+
+
 
 # Layer 구조와 진행 순서
 - Input layer -> hidden layer -> Output Layer

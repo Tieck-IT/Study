@@ -3,19 +3,21 @@ table of study notes
 
 
 ## Tree
-     C:.
-    └─Study
-      │  Data Handling.md
-      │  MachineLearning.md
-      │  NeuralNetwork.md
-      │  README.md
-      │  [templete]pretrained_classification.ipynb
-      │
-      └─tf_keras
-              dnn_practice.ipynb
-              kears_pratice.ipynb
-              movie_prediction_dnn.ipynb
-
+    C:.
+    │  Data Handling.md
+    │  MachineLearning.md
+    │  NeuralNetwork.md
+    │  README.md
+    │  tree.txt
+    │  
+    ├─template
+    │      [template]pretrained_classification.ipynb
+    │      [template]ROCAUC_and_confusionMatrix.ipynb
+    │      
+    └─tf_keras
+            dnn_practice.ipynb
+            kears_pratice.ipynb
+            movie_prediction_dnn.ipynb  
 
 
 

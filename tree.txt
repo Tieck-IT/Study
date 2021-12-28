@@ -1,0 +1,18 @@
+Windows 볼륨에 대한 폴더 경로의 목록입니다.
+볼륨 일련 번호는 D4A1-ACCC입니다.
+C:.
+│  Data Handling.md
+│  MachineLearning.md
+│  NeuralNetwork.md
+│  README.md
+│  tree.txt
+│  
+├─template
+│      [template]pretrained_classification.ipynb
+│      [template]ROCAUC_and_confusionMatrix.ipynb
+│      
+└─tf_keras
+        dnn_practice.ipynb
+        kears_pratice.ipynb
+        movie_prediction_dnn.ipynb
+        
