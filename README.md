@@ -54,39 +54,37 @@ table of study notes
 
 
 # NeuralNetwork.md
-    - tensorflow.keras
-      - Layer 구조 & 진행 순서
-      - Compile
-        - loss 
-          - Classification
-            - binary
-            - multi-label / muliti - class
-          - Regression
-        - image dataset
-          - Classification
-            - multi-class
-      - optimizer
-      - Callbacks
-      - ImageGenerator의
-      - fit (train)
-        - Transfer learning
-      - preprocessing
-        - Scaling / Normalization
-        - Bacth Normalization
-        - Regularization
-        - Overfitting
-        - Cross Validation
-      - model evaluation
-        - Classification metrics from _ML_
-        - loss
-      - Tips
-        - Bacth Normalization
-        - functional API with tf.keras
+- tensorflow.keras
+  - Layer 구조 & 진행 순서
+  - Compile
+    - loss 
+      - Classification
+        - binary
+        - multi-label / muliti - class
+      - Regression
     
-    - DNN
-    - CNN
-      - Convolution
-      - Pooling / Stride / Padding
+      - Classification
+        - multi-class
+    - optimizer
+    - Callbacks
+    - ImageGenerator
+  - fit (train)
+    - Transfer learning
+  - preprocessing
+    - Scaling / Normalization
+    - Bacth Normalization
+    - Regularization
+    - Overfitting
+    - Cross Validation
+  - model evaluation
+    - Classification metrics from _ML_
+    - loss
+
+- functional API with tf.keras
+- DNN
+- CNN
+  - Convolution
+  - Pooling / Stride / Padding
   
 
 # MachineLearning.md
