@@ -22,6 +22,8 @@ Start here to Fine Performance (**excute time**, **val_loss**)
 
     - [[template]ROCAUC_and_confusionMatrix.ipynb](https://github.com/Tieck-IT/Study/blob/main/template/%5Btemplate%5DROCAUC_and_confusionMatrix.ipynb)
         [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/template/%5Btemplate%5DROCAUC_and_confusionMatrix.ipynb)
+    - [[kaggle]x_ray_chest_kfold.ipynb](https://github.com/Tieck-IT/Study/blob/main/template/%5Bkaggle%5Dx_ray_chest_kfold.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/template/%5Bkaggle%5Dx_ray_chest_kfold.ipynb)
+
 
 
 # Layer 구조와 진행 순서
