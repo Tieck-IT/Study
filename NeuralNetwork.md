@@ -261,3 +261,7 @@ ImageGenerator의 2가지 역할
     - 표준 ONNX 포맷
         - TensorRT에서 읽을 수 있음
  
+
+ # U-Net
+ - 커널 사이즈가 줄어들어 병목 구건(Bottleneck)을 만들고 전반부 Layer와 후반부 Reverse Maxpooling을 통해 증가시킨 Layer를 결합하며 층의 크기를 키워나간다.
+ - Input size = Output size

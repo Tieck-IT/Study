@@ -1,6 +1,6 @@
 논문 구현
 
-# 정상 / 초기 / 말기 백내장 탐지
+# 정상 / 초기 / 말기 녹내장 탐지
 - 구현 : [glaucoma_dectetion.ipynb](https://github.com/Tieck-IT/Study/blob/main/paper/glaucoma_dectetion.ipynb)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/paper/glaucoma_dectetion.ipynb)
