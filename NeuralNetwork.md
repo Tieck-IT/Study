@@ -209,7 +209,7 @@ ImageGenerator의 2가지 역할
 
 
 # functional API 
-[이전 층의 출력 = 다음 층의 출력]을 명시하는 표기법
+[이전 층의 출력 = 다음 층의 입력]을 명시하는 표기법
 
       
   ` input_tensor= Input(inputs = Input(shape=(X_train.shape[1],)))  `
