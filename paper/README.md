@@ -16,4 +16,3 @@ Joon-myoung Kwon
   - link is [here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0207982)
 - source : HARVARD Dataverse - Machine learn for glaucoma
   - link is [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1YRRAC)
->>>>>>> 3ba48e6015e5836b3798e659f957f73e1adabd9d
