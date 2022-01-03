@@ -72,7 +72,7 @@ Start here to Fine Performance (**excute time**, **val_loss**)
     - multi-class (1개의 객체만 존재 + 여러개의 class에 속함)
     - multi-label (1개의 라벨에 속한 여러 객체 존재)
 
-## [optimizer](https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png)
+## [Optimizer](https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png)
    
         model.compile(optimizer="RMSprop", ...)
         model.compile(optimizer=RMSprop(learning_rate=0.001), ...)
@@ -261,7 +261,3 @@ ImageGenerator의 2가지 역할
     - 표준 ONNX 포맷
         - TensorRT에서 읽을 수 있음
  
-# 전이학습
-    - 일반 CNN보다 성능이 저조한 경우
-      - 데이터 셋이 일반적인 특성(사물, 사람 등의 일반적인 객체)이 아닌 경우
-        - 의료 데이터셋을 일반적인 사물로 학습된 모델로 전이학습하면 성능이 저조할 수도 있다.

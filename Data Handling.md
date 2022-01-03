@@ -37,6 +37,12 @@
           - numpy는 내부적으로 새로 생성되기 때문
         - (v/h)stack은 데이터가 추가(병합)된 것처럼 보여줌
     - a.astype(np.int) : 타입 변경
+    - concatenate : 축을 명시적으로 설정 할 수 있다. axis = 0
+    
+        `X_total = np.vstack([X_train, X_test]) -> np.concatenate([X_train,X_test])`
+        
+        `y_total = np.hstack([y_train, y_test]) -> np.concatenate([y_train, y_test])`
+
 
     - 축 k를 없애는 차원 축소 연산자
         - sum(data, axis=k)
@@ -122,3 +128,8 @@
         - .git은 유일하다. (하위 dir까지 포함)
         - tree (> 파일명.txt)로 dir 구조를 저장, 확인 할 수 있다.
 
+# 이미지
+- padding : 0으로 채움
+- resize : 적절한 값을 계산
+  - 처리시간 : padding << resize
+- 
