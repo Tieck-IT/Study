@@ -263,5 +263,12 @@ ImageGenerator의 2가지 역할
  
 
  # U-Net
- - 커널 사이즈가 줄어들어 병목 구건(Bottleneck)을 만들고 전반부 Layer와 후반부 Reverse Maxpooling을 통해 증가시킨 Layer를 결합하며 층의 크기를 키워나간다.
+ - 커널 사이즈가 줄어들어 병목 구건(Bottleneck)을 만들고 전반부 Layer와 후반부 Reverse Maxpooling을 통해 증가시킨 Layer를 결합하며 층의 채녈 수를 증가시킨다.
+   -  출력 layer로 Conv2d(1,(1,1)) 사용
+     
  - Input size = Output size
+   - [UNET_도로이미지_segmentation.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/UNET_%EB%8F%84%EB%A1%9C%EC%9D%B4%EB%AF%B8%EC%A7%80_segmentation.ipynb)
+        [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/UNET_%EB%8F%84%EB%A1%9C%EC%9D%B4%EB%AF%B8%EC%A7%80_segmentation.ipynb)
+    - tf.keras.losses.BinaryCrossentropy(from_logits=True)
+      - 내부 구조상 sigmoid 변환 후에 (from_logits= False, Default)로 역 sigmoid로 복원한다.
+      - from_logits=True : sigmoid 된 값을 반환하므로 activation fucntion = 'sigmoid' 필요 없음
