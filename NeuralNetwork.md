@@ -271,4 +271,5 @@ ImageGenerator의 2가지 역할
         [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/UNET_%EB%8F%84%EB%A1%9C%EC%9D%B4%EB%AF%B8%EC%A7%80_segmentation.ipynb)
     - tf.keras.losses.BinaryCrossentropy(from_logits=True)
       - 내부 구조상 sigmoid 변환 후에 (from_logits= False, Default)로 역 sigmoid로 복원한다.
-      - from_logits=True : sigmoid 된 값을 반환하므로 activation fucntion = 'sigmoid' 필요 없음
+      - from_logits=True : sigmoid 된 값을 반환하므로 activation fucntion = 'sigmoid' 필요 없음 
+      - [link](https://utto.tistory.com/8)
