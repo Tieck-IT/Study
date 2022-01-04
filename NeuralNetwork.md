@@ -265,6 +265,8 @@ ImageGenerator의 2가지 역할
  # U-Net
  - 커널 사이즈가 줄어들어 병목 구건(Bottleneck)을 만들고 전반부 Layer와 후반부 Reverse Maxpooling을 통해 증가시킨 Layer를 결합하며 층의 채녈 수를 증가시킨다.
    -  출력 layer로 Conv2d(1,(1,1)) 사용
+      - Conv2d가 여러 장의 필터를 1장으로 압축시키는 역할
+      - Dense(activation=None) / [GlovalAveragePooling](https://gaussian37.github.io/dl-concept-global_average_pooling/) : 사용 가능
      
  - Input size = Output size
    - [UNET_도로이미지_segmentation.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/UNET_%EB%8F%84%EB%A1%9C%EC%9D%B4%EB%AF%B8%EC%A7%80_segmentation.ipynb)
@@ -272,4 +274,73 @@ ImageGenerator의 2가지 역할
     - tf.keras.losses.BinaryCrossentropy(from_logits=True)
       - 내부 구조상 sigmoid 변환 후에 (from_logits= False, Default)로 역 sigmoid로 복원한다.
       - from_logits=True : sigmoid 된 값을 반환하므로 activation fucntion = 'sigmoid' 필요 없음 
+    - loss : binary_crossentropy or MSE
+        - binary_crossentropy로 이진 분류로 접근 했을 때 val_accuracy의 증가폭이 더 빠른 모습을 보였다.
       - [link](https://utto.tistory.com/8)
+
+
+# AutoEncoder
+  - 입력을 다시 출력으로 사용
+    - 입출력 관계를 학습
+  - 인코더(DNN) + 디코더(DNN)
+  - 큰 차원(input shape) -> 축소된 차원(패턴을 가진 핵심 차원) -> 큰 차원(output shape = input shape)
+    - 다른 차원으로 변환 후, 다시 원래 차원으로 되돌아오는 역할
+    - 데이터 = 정보(핵심) + 노이즈
+      - 데이터에서 노이즈를 제거
+      - output이 공간상의 특정 클래스 boundary에 속하면 해당 class로 분류
+    - input shape의 공간 상에서 boundary에 class lebel이 붙어있음(ex. MNIST의 0,1,..,8)
+    - loss : Accuracy
+      - output shape의 공간 class boundary  = input shape의 공간 class boundary인지 체크
+    
+  - [Reference](https://deepinsight.tistory.com/126)
+  - [NoiseRemoval](https://www.youtube.com/watch?v=F7ox6R773OQ)
+    - 학습한 패턴의 파형만 제거 가능
+    - [[AutoEncoder]denoising_autoencoder.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Ddenoising_autoencoder.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Ddenoising_autoencoder.ipynb)
+  - [M-Net](https://github.com/adigasu/FDPMNet/blob/master/test.py)
+    - [[AutoEncoder]mnet_segementation.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Dmnet_segementation.ipynb
+) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Dmnet_segementation.ipynb)
+  - [SuperResolution](https://github.com/krasserm/super-resolution)
+    - [[AutoEncoder]super_resolution.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Dsuper_resolution.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/%5BAutoEncoder%5Dsuper_resolution.ipynb)
+    
+
+# Image Segmentation
+- [github](https://github.com/divamgupta/image-segmentation-keras)
+- [[segementation]unet_segementation_color_image.ipynb](https://github.com/Tieck-IT/Study/blob/main/tf_keras/%5Bsegementation%5Dunet_segementation_color_image.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/tf_keras/%5Bsegementation%5Dunet_segementation_color_image.ipynb)
+
+# Layer
+
+nn을 구성하는 층
+
+
+# Pooling
+- layer의 크기를 줄일 때 사용
+
+- 목적
+  1. input size를 줄임(Down Sampling)
+  2. overfitting을 조절
+
+     : input size가 줄어드는 것 =  parameter의 수가 줄어드는 것
+
+  3. 특징을 잘 뽑아냄.
+
+     : pooling을 했을 때, 특정한 모양을 더 잘 인식할 수 있음.
+  - [reference](https://supermemi.tistory.com/16)
+  
+## MaxPooling
+  
+  `tf.keras.layers.MaxPool2D(
+    pool_size=(2, 2), strides=None, padding='valid', data_format=None,
+    **kwargs)`
+- 범용적으로 사용됨
+- 정해진 크기 내에서 값이 가장 큰 것을 선택
+  - (n,n,3) 에서 (1,1,3) 로 크기 감소 (채널 고정)
+
+## GlovalAveragePooling
+  `tf.keras.layers.GlobalAveragePooling2D(
+    data_format=None, keepdims=False, **kwargs)`
+  - 정해진 크기 내에서 한 채널 값들을 평균
+
+  - 최종 출력에 FC Layer 대신 사용 가능
+
+   - [reference1](https://gaussian37.github.io/dl-concept-global_average_pooling/)
+   - [reference2](https://strutive07.github.io/2019/04/21/Global-average-pooling.html)
