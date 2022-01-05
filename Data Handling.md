@@ -69,6 +69,16 @@
     - shape의 첫번째는 데이터 갯수, shape[1:n]의 형태인 데이터가 shape[0]만큼 존재
     - onehot encoding : np.eye
         - recovering to categorical : np.argmax
+    - numpy.array가 tensorflow 내부에서 tensor로 전환된다.
+      - 이미지 로드
+        1. 읽기 -> 리스트에 저장
+            
+            labels.append(plt.imread(file_name))
+
+            labels = np.expand_dims(labels, axis=-1)
+        2. 이미지가 저장된 리스트를 np.array로 변환
+            - 참고 : [kaggle]kaggle_brainMRI.ipynb
+            
           
 
 
@@ -141,3 +151,7 @@
   - 처리시간 : padding << resize
     - skimage.transform.resize(image, (256,256)) << cv2.resize(image, (256,256),interpolation=cv2.INTER_AREA)
     - cv2의 처리 속도가 더 빠르다.
+
+
+## 이미지 라벨링
+- https://www.makesense.ai/
