@@ -80,6 +80,9 @@
             - 참고 : [kaggle]kaggle_brainMRI.ipynb
             
           
+# pip
+ - !pip uninstall -y keras
+     -  -y : yes 메시지 전달(중단 없이 실행 가능)
 
 
 # linux 기본 명령어
@@ -151,7 +154,11 @@
   - 처리시간 : padding << resize
     - skimage.transform.resize(image, (256,256)) << cv2.resize(image, (256,256),interpolation=cv2.INTER_AREA)
     - cv2의 처리 속도가 더 빠르다.
+- images_list = glob.glob("data/obj/Raccon/train/*[jpg|png|jpeg]")
+- [구글튜토리얼](https://www.tensorflow.org/tutorials/generative/adversarial_fgsm?hl=ko)
+- [텐서플로우허브](https://www.tensorflow.org/hub) : tf로 구성된 다양한 모델 공개
 
 
 ## 이미지 라벨링
-- https://www.makesense.ai/
+- [makesense.ai](https://www.makesense.ai/)
+- [Roboflow](https://app.roboflow.com/mg-park)
