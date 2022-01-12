@@ -344,3 +344,22 @@ nn을 구성하는 층
 
    - [reference1](https://gaussian37.github.io/dl-concept-global_average_pooling/)
    - [reference2](https://strutive07.github.io/2019/04/21/Global-average-pooling.html)
+
+
+# RNN
+- 시계열 데이터에 적합
+- CNN 대비 5 ~ 10배 느림
+  - RNN : N개 perceptron이 병렬 처리
+  - CNN : 순차적으로 진행
+- GRU : LSTM이 아닌 고전적인 방식(일반적인 perceptron 사용) / 성능 : LSTM > GRU
+- 딥러닝에서 순차열(시계열) 데이터는 feature 데이터로 변환 후 사용
+- Input : 2차원 
+- 특정 기간의 데이터로 다음 구간을 예측 
+  - 여러개의 데이터를 피처화
+    - 예측값 1~6 -> 7(예측)
+    - 2~7 -> 8(예측)
+    - 기간을 변경하며 반복
+- OFFSET : 현재 시점의 바로 뒤
+  - OFFSET = 3, 현재시점부터 [t+1,t+2,t+3]을 **출력**하겠다.
+  - 마지막 OFFSET의 위치 = 윈도우의 첫번째값 + 윈도우 길이 + OFSSET 수 - 1
+  - 시간은 (계절, 월) 등으로 속성으로 취급(순차열로 취급하지 않음. 영향력 낮기 때문)
