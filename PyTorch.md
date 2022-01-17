@@ -1,4 +1,7 @@
 # PyTorch
+- 넘파이(NumPy) 배열 vs tf.Tensor
+  - 텐서 는 GPU, TPU와 같은 가속기 메모리에서 사용 가능
+  - 텐서 는 불변성(immutable), 생성 이후 변경이 불가능한 객체
 
 
 - model.eval() vs with.no_grad()
