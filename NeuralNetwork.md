@@ -35,6 +35,8 @@ Start here to Fine Performance (**excute time**, **val_loss**)
 - Dense Layer : 1차원을 입력으로 받는, 퍼셉트론 구조
 - Conv2D Layer : Conv 연산을 진행
 - (Max/average)Pooling2D Layer
+- Bidirectional : 양방향 layer 구조, forward 방향 + Backward 방향
+- RepeatVector : 입력을 n번 반복
 # compile
 ## loss : 손실함수 설정
 - 분류
@@ -220,7 +222,7 @@ ImageGenerator의 2가지 역할
 
 
     
-# dnn
+# DNN
     - Dense Layer의 단점
         - Input shape : only **1차원**
             - 이미지, 영상 데이터 = 4차원 (색 채널 3차원 + 데이터 갯수 1차원)
@@ -229,7 +231,7 @@ ImageGenerator의 2가지 역할
 
 
 
-# cnn
+# CNN
 ## Convolution (합성곱 연산)
     - 핵심이 되는 Feature를 추출하기 위해 사용
       - Input N * M 의 특징을 추상화, 압축하여 추출 n * m
