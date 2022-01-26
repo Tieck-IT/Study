@@ -162,3 +162,8 @@
 ## 이미지 라벨링
 - [makesense.ai](https://www.makesense.ai/)
 - [Roboflow](https://app.roboflow.com/mg-park)
+
+
+# train/test split for DataGenerator
+- 수동 / 자동 으로 나누기
+- [Data_Handing_manually.ipynb](https://github.com/Tieck-IT/Study/blob/main/template/Data_Handing_manually.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Tieck-IT/Study/blob/main/template/Data_Handing_manually.ipynb)

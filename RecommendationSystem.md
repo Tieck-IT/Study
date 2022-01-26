@@ -78,4 +78,54 @@ item의 수가 p개일 때, 가능한 Rule의 수 = 집합의 크기 ^ p - 진 �
 
 
 
+# 딥러닝 기반
+
+1. tokenizing
+2. word2vec (word embedding)
+3. 딥러닝 (Autoencoder)
+
+
+## 현재 많이 사용되는 추천 시스템
+1. CNN을 다른 task로 학습 시킴 (어떤 목적으로 imbedded할 지 선택)
+- 고양이 / 개를 구분하는 feature
+- 낮 / 밤을 구분하는 feature
+
+2. 출력층 바로 직전 layer값을 imbedded value로 사용 (AutoEncoder의 latent dimension와 의미상 비슷)
+- 마지막 바로 전층에 Input이 압축되어 포현되어 있을 것이다. = Imbedded 되었다.
+- (출력층을 버리면) 특별한 이미지에 대해 Encoding 해주는 Encoder가 된다.
+  - 차원이 큰 이미지 -> Embedded 된 값으로 DB에 저장
+  - 유사한 이미지 탐색 : Embeeded vector in DB 와 비교
+    - 거리 찾기 : 유클리드, 코사인 등등 -> O(N)으로 너무 비용 비쌈
+    - Retrieval and Ranking
+
+## Encoder 기반 영상 추천
+- Encoder의 분류기 직전의 층 = Input이 압축되어 있을 것이다.
+- Imbedding 하는 기능을 함수로 구현한 것과 비슷하다. (학습된 NN을 통과시키면 특정한 coce로 반환됨)
+- Data instance를 imbedding 한다.
+  - 유사한 의미 (latent dimension / imbbed value)
+
+```
+# 이미 학습이 끝난 model의 input과 출력층 직전 layer의 output을 output
+encoder = Model(inputs=model.input, outputs=model.layers[-2].output)
+```
+- encoder의 inputs으로 model NN과 연결됨
+- encoder의 ouputs으로 model NN의 직전 layer의 output을 출력함
+
+### DCI KNN
+- 빠른 최근접 검색 알고리즘
+  - C -> python으로 구현한 코드
+  - encoder.pedict(bacth_x) / encoder(bacth_x)
+
+## 샴네트워크를 이용한 추천
+  - one-shot learning    
+    한 레이블 당 하나의 이미지만 있어도 분류할 수 있게 학습시키는 것
+
+  - [Siamese Neural Networks for One-shot Image Recognition(샴 네트워크)](https://jayhey.github.io/deep%20learning/2018/02/06/saimese_network/)
+  
+  ![Siamese](https://i.imgur.com/HLQqD3A.png)
+
+  - 2개의 동일한 구조의 CNN을 동시에 학습
+  - 같으면 1, 다르면 0으로 학습
+  - 같은것과 다른 것을 0.5 비율
+  - 
 
