@@ -372,18 +372,101 @@ nn을 구성하는 층
 - Conv2D + AutoEncoder
   - Encoder : 사이즈 감소(max pooling)
   - Decoder : 사이즈 증가 (Upsampling -> Conv2D == Conv2DTranspose)
-  - latent space(잠재 공간) : 이미지의 핵심이 존재하는 공간
-    - Latent space를 지나서 다시 원본 사이즈로 늘리면 핵심이 아닌 것 제거
+  - real world : 현재 데이터가 존재하는 공간
+    - 측정 가능 (학생의 시험 점수)
+  - latent world(잠재 공간) : 이미지의 핵심이 존재하는 공간
+    - 직접 측정 불가 (학업 능력)
+  
+  
+  - 전제 : real world에서 군집화 되어 있으면 latent world에서도 군집을 이루고 있을 것
+    - Latent world를 지나서 다시 원본 사이즈로 늘리면 핵심이 아닌 것 제거
       - 낙서, 흉터, 금, 이상탐지 등
       - 이상탐지 : 어떤 이미지가 복원 되었을 때 원본하고 차이(픽셀 값 차이, diff)가 크면, 원본과 다른 이미지
+    - skip-GANomarly 등에서, AutoEncoder의 input imbedding(encoding된 값) = AutoEncoder의 output imbedding(분류기 직전 층)(encoding된 값)의 차이를 좁히는 것이 트렌드
 
 
 ## 이상 탐지
 fraud detection system (fds)
 - AutoEncoder 문제
 - 비정상의 클래스가 매우 적음 (98% : 2%)
+- 학습에 사용되지 않은 데이터는 [real world -> latent world -> real world] 경우 차이가 크다.
+  - real world에서의 boundary에서 차이가 크면 이상으로 판별
+
+
+
 - 암호화된 열(값 자체가 해싱, 스케일링 등의 과정으로 암호화됨)
 - 전통적인 Classification 문제로 안풀림
   - 검증할 때는 2% : 2%, 정상 : 비정상 비율로 맞추고 성능 평가
     - 가급적 오버 샘플링 보다는 언더 샘플링으로(원본 데이터 수정어서 신뢰성 있음)
     - 데이터의 수가 너무 작으면 테스트의 의미가 없음(ex, 5개 : 5개)
+
+- [logit](https://haje01.github.io/2019/11/19/logit.html)
+
+# GAN
+- 이상 탐지 문제 
+  - D가 정상인 것의 boundary 학습
+  - 불균형 라벨에 사용 99%(양품) : 1%(불량품)
+- 이미지 번역(변환) _Image translation_
+- 아이디어 떠오름 -> mnist로 해보기 -> cifar10으로 해보기
+  - 안되면 구현하기 어려운 아이디어
+- real world의 데이터 분포는 가우시안 분포 사용
+
+## mode collapse
+- 학습 안되기로 유명
+  - 우연히 boundary 안에 포함되는 결과를 출력 -> G가 동일한 이미지 생성
+- [해결 방법](https://developer-ping9.tistory.com/108)
+  - DCGAN
+    - Deep Convolutional Generative Adversarial Networks
+  - wgan gp
+    - 최근 구조, 학습 잘되는 구조
+    - wgan에서 gradient 규제
+  
+
+## Discriminator
+- 판별기 : 이미지 판별 (진짜 / 가짜)
+- 위조 지폐 판별가
+- 목적 : boundary 학습
+  - boundary : 주어진 label과 아닌 것들을 분류
+
+
+## Generator
+- 생성기 : 노이즈에서 가짜 이미지 생성
+- 위조 지폐 생성자
+- 목적 : boundary안에 포함되는 이미지 생성
+
+- 이미지 = 픽셀, n차원 공간상에 뭉쳐서 구조화 되어 있음
+- 공간 상의 같은 군집 = 같은 class
+
+
+
+### 학습 과정
+1. n차원 공간에 무작위로 생성
+2. Discriminator의 boundary(판별 기준) 안으로 들어감
+3. Discriminator가 boundary를 좁힘 (더 엄격한 기준)
+4. 2 - 3 반복
+5. 새로운 데이터가 생성됨
+
+
+### 기존의 방법의 한계를 극복
+- 불균형 라벨 99% : 1% 인 경우
+
+
+#### boundary 근처에서 샘플링
+- 1 (boundary 안의 데이터) : 2^n
+  - 고양이 vs 강아지
+    - 고양이 100개 샘플링, 강아지 100개 샘플링
+  - 고양이 vs 고양이 이외
+    - 고양이 100개 샘플링 - 개미, 거미, 강아지, 호랑이 .... 각각 100개씩 샘플링
+  - 차원이 늘어날 수록 샘플링 난이도는 매우 증가
+
+## GAN 전이학습
+### F 고정 , B 학습
+- 전이학습 F를 기존 모델에서 가져옴(고정)
+- F의 output Z로 Classifier B를 학습
+
+### F 학습, B 고정
+
+
+## CycleGan
+- 도메인 간 pair가 되는 데이터 찾기
+  - 풍경화 - 사진
