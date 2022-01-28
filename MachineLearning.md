@@ -1,4 +1,4 @@
-# 머신러닝
+# Machine learning
 학습은 Training data set의 분포 하에서 진행되어야 한다.
 
 Validation data set과 Test data set은 실제 상황을 가정했기 떄문에, 다룰 때 주의해야한다.
