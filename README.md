@@ -50,10 +50,6 @@ Study
 ```
 
 
-
-
-
-
 # Data Handling.md
   - data handling
     - pandas
@@ -116,4 +112,16 @@ Study
 - CNN
   - Convolution
   - Pooling / Stride / Padding
-  
+- Layer
+  - pooling
+- RNN
+- AutoEncoder
+  - Anomaly Detection
+  - GAN
+
+
+# Machine learning.md
+
+- catboost
+- xgb
+- lgbm

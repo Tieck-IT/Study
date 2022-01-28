@@ -1,22 +1,4 @@
 
-  
-
-
-
-## ImageGenerator
-ImageGenerator의 2가지 역할
-1. Data Augmentation
-2. Bring Data per Batch
-- 데이터를 가져와서 전처리하는 일종의 파이프라인
-- RAM SIZE <<< DATA SIZE 이기 때문에 전체 데이터 셋을 메모리에 한번에 올리고 처리할 수 없다. 그래서 Batch 단위로 가져와서 처리한다.
-  - ImageGenerator 
-    - _tf.keras.preprocessing.image.ImageDataGenerator_
-
-
-
-
-
-
     
 # DNN
     - Dense Layer의 단점
@@ -185,7 +167,7 @@ nn을 구성하는 층
     - skip-GANomarly 등에서, AutoEncoder의 input imbedding(encoding된 값) = AutoEncoder의 output imbedding(분류기 직전 층)(encoding된 값)의 차이를 좁히는 것이 트렌드
 
 
-## 이상 탐지
+## 이상 탐지 _Anomaly Detection_
 fraud detection system (fds)
 - AutoEncoder 문제
 - 비정상의 클래스가 매우 적음 (98% : 2%)
@@ -202,7 +184,7 @@ fraud detection system (fds)
 
 - [logit](https://haje01.github.io/2019/11/19/logit.html)
 
-# GAN
+## GAN
 - 이상 탐지 문제 
   - D가 정상인 것의 boundary 학습
   - 불균형 라벨에 사용 99%(양품) : 1%(불량품)
