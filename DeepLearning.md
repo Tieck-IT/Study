@@ -145,7 +145,8 @@ compile -> fit -> evaluate, predict
 
 ![activation_fun_img](https://mblogthumb-phinf.pstatic.net/MjAyMDAyMjVfMTQ3/MDAxNTgyNjA5NDY3MTY3.228bUv_5mrol1w7X0NiFMD1UNru9zyf3yIJGcON-An0g.3Kzynlja9y_F9yTfANl937elQAK1pTGoJ_al7Om7TYsg.PNG.handuelly/image.png?type=w800)
 
-_from [here](https://skyil.tistory.com/33)_  
+_from [Convexity](https://skyil.tistory.com/33) , [Activation function](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=handuelly&logNo=221824080339)_
+
 
 ### 분류 _Classification_
   - 이미지 데이터 분류
