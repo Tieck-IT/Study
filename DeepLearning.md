@@ -137,7 +137,7 @@ compile -> fit -> evaluate, predict
 ## 손실함수 설정 _loss_
 > 손실 함수는 볼록성(Convexity)을 가져야 학습이 잘 이루어 진다.
 
-- Convex의 형태일 떄 경사 하강법으로 최적값으로 이동하기 때문
+- Convex의 형태일 때 경사 하강법으로 최적값으로 이동하기 때문
 - 기울기 사라짐 (Vanishing gradient) 문제를 극복 가능 
   - sigmoid, tanh의 양 끝에서 기울기 0
   - ReLU에서 값이 음수인 영역에서 기울기 0 (장점 : sigmoid, tanh 함수보다 학습 빠르고, 연산 비용 적음)
