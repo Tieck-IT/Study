@@ -59,10 +59,9 @@ compile -> fit -> evaluate, predict
 - input은 숫자 형태 (numpy로 넣기)
     sol 1. df.to_numpy() (type : np.ndarray)
     sol 2. df.astype(float) (type : df)
-- activation func을 relu 했을 대 loss가 전부 nan
+- activation func을 relu 했을 때 loss가 전부 nan
     - tanh를 쓰니 정상작동
-        - target이 너무 커서 그렇다.
-        - log 스케일링 한 값의 평균이 5.305 , 6.249
+        - target이 너무 큰 경우 발생
 
 
 ## 정규화
@@ -136,6 +135,18 @@ compile -> fit -> evaluate, predict
 
 # 컴파일 _compile_
 ## 손실함수 설정 _loss_
+> 손실 함수는 볼록성(Convexity)을 가져야 학습이 잘 이루어 진다.
+
+- Convex의 형태일 때 경사 하강법으로 최적값으로 이동하기 때문
+- 기울기 사라짐 (Vanishing gradient) 문제를 극복 가능 
+  - sigmoid, tanh의 양 끝에서 기울기 0
+  - ReLU에서 값이 음수인 영역에서 기울기 0 (장점 : sigmoid, tanh 함수보다 학습 빠르고, 연산 비용 적음)
+  - Leaky ReLU는 ReLU의 단점을 개선해서 음수인 영역에서 기울기가 0이 되지 않음
+
+![activation_fun_img](https://mblogthumb-phinf.pstatic.net/MjAyMDAyMjVfMTQ3/MDAxNTgyNjA5NDY3MTY3.228bUv_5mrol1w7X0NiFMD1UNru9zyf3yIJGcON-An0g.3Kzynlja9y_F9yTfANl937elQAK1pTGoJ_al7Om7TYsg.PNG.handuelly/image.png?type=w800)
+
+_from [Convexity](https://skyil.tistory.com/33) , [Activation function](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=handuelly&logNo=221824080339)_
+
 
 ### 분류 _Classification_
   - 이미지 데이터 분류
