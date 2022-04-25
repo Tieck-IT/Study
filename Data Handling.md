@@ -125,6 +125,11 @@
   - wget (url): web get
       - web에서 url을 다운
       - O : 파일명 지정
+  - curl -L -O <github 다운로드 링크>
+    - http 메시지를 쉘상에서 요청하여 결과를 확인하는 명령어 이며, curl 명령어는 http를 이용하여 경로의 데이터를 가져온다
+    - O : 서버 파일 이름 변경 없이 다운로드
+    - L : url이 가르키는 redirect URL까지 접속함
+    - 응용 : 깃허브에서 단일 파일 다운받기 from [link](https://dreamlog.tistory.com/611)
  # git
   - add (파일명/ .[all])
       - stage에 데이터를 추가한다.
